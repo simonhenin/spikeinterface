@@ -61,6 +61,9 @@ from .sinapsrecordingextractors import (
     read_sinaps_research_platform_h5,
 )
 
+# osort sorter extractor
+from .osortextractors import OsortSortingExtractor, read_osort
+
 # sorting in relation with simulator
 from .shybridextractors import (
     SHYBRIDRecordingExtractor,
@@ -146,6 +149,8 @@ _sorting_extractor_full_dict = {
     NwbSortingExtractor: dict(wrapper_string="read_nwb_sorting", wrapper_class=read_nwb_sorting),
     IblSortingExtractor: dict(wrapper_string="read_ibl_sorting", wrapper_class=read_ibl_sorting),
     CellExplorerSortingExtractor: dict(wrapper_string="read_cellexplorer", wrapper_class=read_cellexplorer),
+    # OSort
+    OsortSortingExtractor: dict(wrapper_string="read_osort", wrapper_class=read_osort),
 }
 _sorting_extractor_full_dict.update(neo_sorting_extractors_dict)
 
