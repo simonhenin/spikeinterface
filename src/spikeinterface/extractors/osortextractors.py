@@ -100,7 +100,7 @@ class OsortSortingExtractor(BaseSorting):
         """Parse the osort .mat file structure."""
         
         # Common osort output variable names to check
-        possible_spike_time_vars = [ 'newSpikesNegative', 'newSpikesPositive']
+        possible_spike_time_vars = [ 'newTimestampsNegative', 'newTimestampsPositive']
         possible_cluster_vars = ['assignedNegative', 'assignedPositive']
         possible_quality_vars = ['cluster_group', 'group', 'quality', 'cluster_quality']
         
@@ -114,8 +114,10 @@ class OsortSortingExtractor(BaseSorting):
         if spike_times_var is None:
             raise ValueError(f"Could not find spike times variable. Available variables: {list(self._data.keys())}")
         
-        self._spike_times = np.asarray(self._data[spike_times_var])
-        
+        _time_start = self._data['timeStart'] if 'timeStart' in self._data else 0
+        self._spike_times = np.rint((self._data[spike_times_var] - _time_start) * (self._sampling_frequency / 1e6))  # convert to samples
+    
+
         # Find cluster assignments
         cluster_var = None
         for var in possible_cluster_vars:
