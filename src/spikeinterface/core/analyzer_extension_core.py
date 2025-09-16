@@ -698,7 +698,7 @@ class ComputeTemplates(AnalyzerExtension):
                 channel_ids=self.sorting_analyzer.channel_ids,
                 unit_ids=unit_ids,
                 probe=self.sorting_analyzer.get_probe(),
-                is_scaled=self.sorting_analyzer.return_in_uV,
+                is_in_uV=self.sorting_analyzer.return_in_uV,
             )
         else:
             raise ValueError("`outputs` must be 'numpy' or 'Templates'")
@@ -739,7 +739,7 @@ class ComputeNoiseLevels(AnalyzerExtension):
     The noise levels do not depend on the unit list, only the recording, but it is a convenient way to
     retrieve the noise levels directly ine the WaveformExtractor.
 
-    Note that the noise levels can be scaled or not, depending on the `return_scaled` parameter
+    Note that the noise levels can be scaled or not, depending on the `return_in_uV` parameter
     of the `SortingAnalyzer`.
 
     Parameters
